@@ -25,10 +25,6 @@ class ViewController extends Controller
     public function signin(){
         return view('signin');
     }
-    public function users(){
-        Gate::authorize('isAdmin');
-        return view('users');
-    }
 
     public function profile(){
         return view('user_profile');
@@ -39,19 +35,32 @@ class ViewController extends Controller
     }
 
     public function adduserAdmin(){
+        Gate::authorize('isAdmin');
         return view('adduser');
     }
 
     // Admin User View 
         
     public function viewusersAdmin(){
+        Gate::authorize('isAdmin');
         $users = User::all(); 
         return view('viewusers',compact('users'));
     }
 
 // Admin User View End
 
+// Admin User Edit
+
+public function edituserAdmin($id){
+    Gate::authorize('isAdmin');
+    $user = User::find($id);
+    return view('edituser',compact('user'));
+}
+
+// Admin User Edit End
+
     public function viewpostsAdmin(){
+        Gate::authorize('isAdmin');
         return view('viewposts');
     }
 

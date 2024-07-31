@@ -19,8 +19,7 @@ Route::controller(ViewController::class)->group(function(){
     Route::get('/','index')->name('home');
     // Admin
     Route::get('/admin','admin')->name('admin');
-    // Users
-    Route::get('/admin/users','users')->name('users');
+    
      // profile
      Route::get('/profile','profile')->name('profile');
 
@@ -34,8 +33,12 @@ Route::controller(ViewController::class)->group(function(){
         // view all users //admin
         Route::get('/viewusers/admin','viewusersAdmin')->name('viewusers.admin');
 
+        // edit user //admin
+        Route::get('/edituser/admin/{id}','edituserAdmin')->name('edituser.admin');
+
         // view all posts //admin
         Route::get('/viewposts/admin','viewpostsAdmin')->name('viewposts.admin');
+
    
        // Signup
        Route::get('/signup','signup')->name('signup')->middleware(isLogin::class);
@@ -61,8 +64,13 @@ Route::controller(QueryController::class)->group(function(){
      // AddUser
     Route::post('/adduser/admin','addUserAdmin')->name('add.User.Admin');
 
+    // Edit User
+    Route::post('/editusersuccess/admin\{id}','editusersuccessAdmin')->name('editusersuccess.admin');
+
 
     
+    // Delete User
+    Route::get('/deleteuser/{id}','deleteuser')->name('delete.user');
 
     // logout
     Route::get('/logout','logout')->name('logout');

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\adminMail;
 use App\Mail\userMail;
+use App\Mail\adminCreated_users;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
 class QueryController extends Controller
@@ -30,13 +30,13 @@ class QueryController extends Controller
                 $subject = "New User Registration";
                 $message = "Hey $name";
                 Mail::to($email)->send(new adminMail($subject, $message));
-                return redirect()->route('admin')->with('success','Welcome Admin' . Auth::user()->name );
+                return redirect()->route('admin')->with('success','Welcome Admin ' . Auth::user()->name );
             }else{
                 $email = $auth_user->email;
                 $subject = "New User Registration";
                 $message = "Hey $name";
                 Mail::to($email)->send(new userMail($subject, $message));
-                return redirect()->route('home')->with('success','Welcome' . Auth::user()->name );
+                return redirect()->route('home')->with('success','Welcome ' . Auth::user()->name );
             }
         }
     }
@@ -51,9 +51,9 @@ class QueryController extends Controller
             $auth_user = Auth::user();
 
             if($auth_user->role === 'Admin'){
-                return redirect()->route('admin')->with('success','Welcome Admin' . Auth::user()->name );
+                return redirect()->route('admin')->with('success','Welcome Admin ' . Auth::user()->name );
             }else{
-                return redirect()->route('home')->with('success','Welcome' . Auth::user()->name );
+                return redirect()->route('home')->with('success','Welcome ' . Auth::user()->name );
             }
             
         }
@@ -99,6 +99,12 @@ class QueryController extends Controller
             $user = User::create($request);
 
             if($user){
+                $email = $user->email;
+                $ccEmail = "abdullahsheikhmuhammad21@gmail.com";
+                $name = $user->name;
+                $subject = "New User Registration";
+                $message = "Hey $name";
+                Mail::to($email)->cc($ccEmail)->send(new adminCreated_users($subject, $message));
                 return redirect()->route('admin')->with('success','User added successfully');
             }else{
                 return redirect()->back()->with('error','User Not Created');
@@ -106,7 +112,33 @@ class QueryController extends Controller
         }
 
      //  { // Admin User Views in VIew Controller} //
+
+    //  User Edit Admin
+    public function editusersuccessAdmin(Request $req ,int $id){
+            $user = User::find($id);
+            $updated = $user->update([
+            'name' => $req->name,
+            'email' => $req->email,
+            'role' => $req->role,
+        ]);
+        if($updated){
+            return redirect()->route('viewusers.admin')->with('success','User has been updated');
+        }else{
+            return redirect()->route('viewusers.admin')->with('error','User Not updated');
+        }
+    }
+    //  User Edit Admin
          
+
+    //  User Delete Admin
+    public function deleteuser($id){
+        $user = User::find($id);
+        $user->delete();
+        if($user){
+            return redirect()->route('viewusers.admin')->with('success','User deleted successfully');
+        }
+    }
+    //  User Delete Admin End
         public function logout(){
             Auth::logout();
             return redirect()->route('signin');

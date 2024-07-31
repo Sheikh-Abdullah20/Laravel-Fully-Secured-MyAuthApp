@@ -5,6 +5,19 @@ View
 @endsection
 
 @section('content')
+
+@if (session()->has('success'))
+<div class="alert alert-success text-dark">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session()->has('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="container animate-slide">
     <div class="row text-center">
         <div class="col-md-12">
@@ -23,16 +36,24 @@ View
                     <th scope="col">NAME:</th>
                     <th scope="col">EMAIL:</th>
                     <th scope="col">ROLE:</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
+                    @foreach ( $users as $user )
+                    <tr>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td>
+                            <a href="{{ route('edituser.admin', $user) }}"><i class="fa-regular fa-pen-to-square" style="color: #000000"></i></a>
+                            <a href="{{ route('delete.user' , $user) }}"><i class="fa-solid fa-trash" style="color: #000000;"></i></a>
+                        </td>
+                      </tr>
+                      
+                    @endforeach
                   
                 </tbody>
               </table>

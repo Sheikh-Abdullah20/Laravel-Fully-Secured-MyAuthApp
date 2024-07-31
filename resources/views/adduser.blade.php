@@ -20,7 +20,7 @@ Add-User
     </div>
     <hr>
     <div class="row">
-        <div class="col-md">
+        <div class="col-md-12">
             <form action="{{ route('add.User.Admin') }}" method="POST">
                 @csrf
                 <div class="mb-3">

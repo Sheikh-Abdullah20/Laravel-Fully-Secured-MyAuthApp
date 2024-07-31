@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> App - @yield('title') </title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
     <!-- Custom CSS for animations -->
     <style>
         body {
@@ -81,7 +82,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="{{ route('admin') }}"><i class="fas fa-tachometer-alt"></i> DashBoard</a>
-        <a href="{{ route('users') }}"><i class="fas fa-users"></i> Users</a>
+        <a href="{{ route('viewusers.admin') }}"><i class="fas fa-users"></i> Users</a>
         <a href="#settings"><i class="fas fa-cogs"></i> Settings</a>
         <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
@@ -94,7 +95,8 @@
 
 </body>
     <!-- Bootstrap and jQuery JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/stackPath.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 </html>
