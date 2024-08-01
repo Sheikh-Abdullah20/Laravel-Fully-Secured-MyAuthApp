@@ -5,7 +5,22 @@
 SignUp
 @endsection
 
+@section('form_name')
+    SignUp
+@endsection
+
 @section('content')
+
+@if(session()->has('success'))
+    <div class="alert alert-success text-dark">
+        {{ session('success') }}
+    </div>
+
+    @elseif((session()->has('error')))
+    <div class="alert alert-danger text-dark">
+        {{ session('error') }}
+    </div>
+@endif
 
 <form class="w-75 m-auto my-4" method="POST" action="{{ route('add.User') }}">
     @csrf
@@ -41,8 +56,8 @@ SignUp
             <button type="submit" class="btn btn-light w-50">SignUp</button>
         </div>
 
-        <div class="col-md-6 text-center  ">
-            <a href="{{ route('signin') }}" class="btn btn-light w-50">Login</a>
+        <div class="col-md-6 text-center">
+            <a href="{{ route('signin') }}" class="btn btn-light w-50 align-content-center">Login</a>
             <p>Have An Account?</p>
         </div>
     </div>

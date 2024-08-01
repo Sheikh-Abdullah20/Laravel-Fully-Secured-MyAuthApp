@@ -43,7 +43,11 @@ class PostController extends Controller
 
     public function editpost($id){
         $post = Post::find($id);
-        return view('Users/editpost', compact('post'));
+       if(Gate::allows('post',$post)){
+           return view('Users/editpost', compact('post'));
+       }else{
+        return redirect()->back()->with('error','You Are Not Allowed to See Others Posts Or Edit ');
+       }
     }
 
     public function editpostSuccess(Request $req, $id){

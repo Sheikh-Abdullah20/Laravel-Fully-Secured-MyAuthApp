@@ -42,10 +42,11 @@ View
                   </tr>
                 </thead>
                 <tbody>
-
+                    @php $count = 0; @endphp
                     @foreach ( $users as $user )
+                    @php $count++; @endphp
                     <tr>
-                        <th scope="row">{{$user->id}}</th>
+                        <th scope="row">{{$count}}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>

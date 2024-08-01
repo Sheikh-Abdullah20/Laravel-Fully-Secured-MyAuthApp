@@ -36,7 +36,7 @@ All-Posts
 </div>
 @endif
 
-<div class="container">
+<div class="container animate-slide">
     <div class="row">
         <div class="col-md-12">
             <h1 class="display-3">
@@ -44,8 +44,8 @@ All-Posts
             </h1>
         </div>
     </div>
-
-    <div class="row">
+<hr>
+    <div class="row mt-5">
         @foreach ($posts as $post )
         <div class="col-md-4">
             <div class="card">

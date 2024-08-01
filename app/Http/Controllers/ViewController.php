@@ -52,7 +52,8 @@ class ViewController extends Controller
         
     public function viewusersAdmin(){
         if(Gate::authorize('isAdmin')){
-            $users = User::all(); 
+            $email = Auth::user()->email;
+            $users = User::where('email', '!=', $email)->get();; 
             return view('Admin/viewusers',compact('users'));
         }else{
             return redirect()->route('home');

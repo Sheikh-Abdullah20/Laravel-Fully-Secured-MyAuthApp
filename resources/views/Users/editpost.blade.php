@@ -4,7 +4,11 @@ Add-Post
 @endsection
 
 @section('content')
-
+@if(@session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="container animate-slide">
     <div class="content">
 
@@ -36,7 +40,7 @@ Add-Post
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Post Image</label>
-                        <input type="file" class="form-control" id="image" name="image" value="{{ $post->image }}">
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
 
                     <button type="submit" class="btn btn-dark">Post</button>

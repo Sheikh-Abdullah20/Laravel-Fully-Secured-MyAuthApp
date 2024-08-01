@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Website - @yield('title')</title>
+    <title> App - @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <style>
         html,body {
@@ -33,7 +33,7 @@
         }
 
         form input:focus {
-            box-shadow: 5px 5px 20px rgb(255, 255, 255) !important;
+            box-shadow: 5px 5px 20px rgb(41, 40, 40) !important;
             border-color: white !important;
         }
 
@@ -54,6 +54,14 @@
             box-shadow: 5px 5px 20px rgb(255, 212, 133);
             text-indent: 15px;
         }
+
+        .form-control{
+            transition: 0.3s ease;
+        }
+        .form-select:focus {
+            box-shadow: 5px 5px 20px rgb(41, 40, 40) !important;
+            border-color: white !important;
+        }
     </style>
 </head>
 
@@ -72,7 +80,7 @@
                 <!-- card -->
                 <div class="card">
                     <div class="card-body rounded">
-                        <h1 class=" display-1 text-center fw-bold">Login</h1>
+                        <h1 class=" display-1 text-center fw-bold">@yield('form_name')</h1>
                         <!-- form -->
                         @yield('content')
                         <!-- form -->

@@ -38,6 +38,8 @@ class QueryController extends Controller
                 Mail::to($email)->send(new userMail($subject, $message));
                 return redirect()->route('home')->with('success','Welcome ' . Auth::user()->name );
             }
+        }else{
+            return redirect()->back()->with('error', 'User not Created');
         }
     }
 
@@ -46,17 +48,21 @@ class QueryController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        
             Auth::attempt($request);
-            
             $auth_user = Auth::user();
 
+            if($auth_user){
             if($auth_user->role === 'Admin'){
                 return redirect()->route('admin')->with('success','Welcome Admin ' . Auth::user()->name );
             }else{
                 return redirect()->route('home')->with('success','Welcome ' . Auth::user()->name );
             }
-            
+        }else{
+            return redirect()->back()->with('error', 'User not Found');
         }
+        }   
+        
 
         // user Profile Delete
         public function profileimageDelete(){
@@ -70,8 +76,12 @@ class QueryController extends Controller
                         'profile' => null,
                     ]);
                     return redirect()->route('profile')->with('success','Profile Image Deleted Succesfully');
+
                 }else{
-                    return redirect()->route('profile')->with('error','Profile Image Not Deleted');
+                    $user->update([
+                        'profile' => null,
+                    ]);
+                    return redirect()->route('profile')->with('success','Image Deleted From DataBase');
                 }
         }
 
