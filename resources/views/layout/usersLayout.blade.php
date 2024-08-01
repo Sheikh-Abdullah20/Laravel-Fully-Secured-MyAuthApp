@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App - @yield('title') </title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/stackpath.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/stackpath.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <!-- Custom CSS for animations -->
@@ -16,7 +17,7 @@
             background-color: #ffffff;
         }
         .navbar {
-            background-color: #313131;
+            background-color: #313131 !important;
         }
         .navbar a {
             color: #fff;

@@ -10,13 +10,14 @@ Home
 </div>
 @elseif(session()->has('error'))
 <div class="alert alert-danger text-dark">
-    {{ session('success') }}
+    {{ session('error') }}
 </div>
 @endif
 <div class="container animate-slide">
 
     <div class="content">
-        <h1 class="text-center">Welcome - <span class="text-danger"> {{ Auth::user()->name }} </span> </h1>
+    
+        <h1>Welcome - <span class="text-danger"> {{ Auth::user()->name }} </span> </h1>
         <hr>
         <div class="row">
             <div class="col-md-12">
@@ -27,7 +28,7 @@ Home
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <h2 class="text-center display-5">Your <span class="span_post"> Posts </span></h2>
+                <h2 class="text-center display-5">Your <span class="span_post"> Post </span></h2>
                 <hr>
             </div>
         </div>
@@ -37,7 +38,7 @@ Home
             @foreach ($posts as $post )
             <div class="col-md-4">
                 <div class="card">
-                    <img src="{{ 'storage/'. $post->image }}" class="card-img-top" alt="..."
+                    <img src="{{ asset('storage/'. $post->image) }}" class="card-img-top" alt="..."
                         style="object-fit: contain; width:100%; height:200px">
                     <hr>
                     <div class="card-body">

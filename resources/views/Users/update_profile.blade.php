@@ -1,19 +1,20 @@
 @extends('layout.usersLayout')
 
 @section('title')
-    Profile
+    Profile-Update
 @endsection
 
 @section('hideCss',true)
 
 @section('css')
+
 <style>
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f4f4f4;
     }
     .navbar {
-        background-color: #333;
+        background-color: #333 !important;
     }
     .navbar a {
         color: #fff;
@@ -36,9 +37,8 @@
         margin-right: 20px;
         width: 100px;
         height: 100px;
+        cursor: pointer;
         object-fit: contain;
-        
-
     }
     .profile-header h2 {
         margin: 0;
@@ -55,6 +55,9 @@
     }
     .profile-details p {
         margin: 5px 0;
+    }
+    .form-group {
+        margin-bottom: 15px;
     }
     @keyframes slideInDown {
         from {
@@ -74,6 +77,7 @@
             opacity: 1;
         }
     }
+
     svg{
             width: 20px;
             fill: white;
@@ -94,64 +98,64 @@
 </style>
 
 @endsection
+
 @section('content')
-@if (session()->has('success'))
-    <div class="alert alert-success text-dark">
-        {{ session('success') }}
-    </div>
-    @elseif(session()->has('error'))
-    <div class="alert alert-danger text-dark">
-        {{ session('error') }}
-    </div>
-@endif
+
 <div class="container mt-5">
-    
-    <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-            <a href="{{ route('profileupdate') }}" class="btn btn-outline-info text-dark my-2"> Update Profile</a>
+    <form action="{{ route('update.profile') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="profile-header">
+            <input type="file" id="file" onchange="document.querySelector('#img').src= window.URL.createObjectURL(this.files[0])" name="profile" style="display:none;">
+            @if (Auth::user()->profile)
+            <img src="{{ asset('storage/' . Auth::user()->profile) }}" alt="Profile Picture" id="img" width="100px">
+            @else
+            <img src="{{ asset('image/image-insert.png') }}" alt="Profile Picture" id="img" style="width: 100px; height: 100px;">
+            @endif
+            <div>
+                <h2>{{ Auth::user()->name }}</h2>
+                @error('profile')
+                <span class="text-danger">
+                   {{ $message }}
+                </span>
+           @enderror
+            </div>
+          
         </div>
-    </div>
 
-  
+        <div class="profile-details">
+            <h3>Profile Details</h3>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ Auth::user()->email }}">
+                <div class="span text-danger font-weight-bold">You May Lose Your Data After Changing The Email So Be Careful !!</div>
+            </div>
 
+            <div class="row">
 
-<div class="profile-header">
-        @if(Auth::user()->profile)
-        <div style="position: relative; display: inline-block;">
-            <img src="{{ asset('storage/' . Auth::user()->profile) }}" alt="Profile Picture" id="img" style="width: 100px; height: 100px;">
-            <a href="{{ route('profileimage.delete') }}" style="position: absolute; top: 0; right: 0; background-color:#333">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-circle" viewBox="0 0 16 16">
-                    <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm3.93 4.34a.5.5 0 0 1 0 .707L8.707 8 11.93 11.23a.5.5 0 1 1-.707.707L8 8.707 4.77 11.93a.5.5 0 1 1-.707-.707L7.293 8 4.07 4.77a.5.5 0 1 1 .707-.707L8 7.293l3.23-3.23a.5.5 0 0 1 .707 0z"/>
-                </svg>
-            </a> 
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-outline-info text-dark">Save Changes</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ route('profile') }}"  class="btn btn-outline-info text-dark w-75">Back</a>
+                </div>
+             </div>
+
         </div>
-    @else
-        <img src="{{ asset('image/image-insert.png') }}" alt="Profile Picture" id="img" style="width: 100px; height: 100px;">
-    @endif
+    </form>
 
-    <input type="file" class="d-none" id="file">
-    <div>
-        <h2>{{ Auth::user()->name }}</h2>
-    </div>
-    </div>
-
-
-<div class="profile-details">
-    
-    <h3>Profile Details</h3>
-    <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-    <p><strong>Role:</strong> {{ Auth::user()->role }}</p>
-    <a href="{{ route('home') }}"  class="btn btn-outline-info text-dark  my-2">Back</a>
-</div>
 </div>
 @endsection
 
 @section('script')
-    {{-- <script>
+    <script>
   
             document.getElementById('img').addEventListener('click', function() {
             document.getElementById('file').click().
             console.log(img);
         });
-    </script> --}}
+    </script>
 @endsection

@@ -3,6 +3,21 @@
 @section('title')
     Admin
 @endsection
+
+@section('css')
+    <style>
+
+.card {
+       border-radius: 2rem;
+        color: white;
+        box-shadow: 5px 5px 50px rgb(49, 49, 83);
+        border: 1px solid yellow;
+    }
+
+
+    </style>
+@endsection
+
 @section('content')
 
     @if (session()->has('success'))
@@ -11,7 +26,7 @@
         </div>
     @endif
 
-    <h2 class=" animate-slide display-4 text-center">Admin Dashboard</h2>
+    <h2 class=" animate-slide display-4 text-center">Admin Actions</h2>
     <hr>
     <div class="row">
         <div class="col-lg-6">

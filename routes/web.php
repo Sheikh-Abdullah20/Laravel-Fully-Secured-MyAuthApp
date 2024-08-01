@@ -39,8 +39,7 @@ Route::controller(ViewController::class)->group(function(){
         // edit user //admin
         Route::get('/edituser/admin/{id}','edituserAdmin')->name('edituser.admin');
 
-        // view all posts //admin
-        Route::get('/viewposts/admin','viewpostsAdmin')->name('viewposts.admin');
+
 
    
        // Signup
@@ -65,13 +64,25 @@ Route::controller(PostController::class)->group(function(){
 
     // delete post  //user
     Route::get('/delete/post/{id}','deletepost')->name('delete.post');
+
+    // delete post  //Admin
+    Route::get('/delete/post/admin/{id}','deletepostAdmin')->name('deleteAdmin.post');
+
+    // view all posts //admin
+    Route::get('/viewposts/admin','viewpostsAdmin')->name('viewposts.admin');
+
+        // view all posts //admin
+        Route::get('/editpost/admin/{id}','editpostAdmin')->name('editpost.admin');
     
 
        // add post success //user
        Route::post('/addpostsuccess','addpostsuccess')->name('add.postSuccess');
 
         // edit post success //user
-        Route::post('/edit/post/success{id}','editpostSuccess')->name('edit.postSuccess');
+        Route::post('/edit/post/success/{id}','editpostSuccess')->name('edit.postSuccess');
+
+        // Edit Post //Admin
+        Route::post('/edit/post/success/admin/{id}','editpostSuccessAdmin')->name('edit.postSuccessAdmin');
     
 });
 
