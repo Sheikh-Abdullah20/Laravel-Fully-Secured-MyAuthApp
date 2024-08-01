@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ViewController extends Controller
 {
     public function index(){
-        return view('welcome');
+        $id = Auth::user()->id;
+        $posts = Post::where('user_id', '=', $id)->get();
+        // return $posts;
+        return view('welcome',compact('posts'));
     }
     public function admin(){
         if(Gate::allows('isAdmin')){
@@ -63,5 +68,7 @@ public function edituserAdmin($id){
         Gate::authorize('isAdmin');
         return view('viewposts');
     }
+
+ 
 
 }

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ViewController;
 use App\Http\Middleware\isLogin;
 use App\Http\Middleware\userAuthentication;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -25,6 +27,7 @@ Route::controller(ViewController::class)->group(function(){
 
       // profileUpdate
       Route::get('/profileupdate','profileupdate')->name('profileupdate');
+  
     });
 
         // add User //admin
@@ -48,6 +51,33 @@ Route::controller(ViewController::class)->group(function(){
 
 // View Controller Routes End
 
+
+// Post Controller Routes
+
+Route::controller(PostController::class)->group(function(){
+    
+    // add post  //user
+    Route::get('/addpost','addpost')->name('add.post');
+
+    
+    // edit post  //user
+    Route::get('/edit/post/{id}','editpost')->name('edit.post');
+
+    // delete post  //user
+    Route::get('/delete/post/{id}','deletepost')->name('delete.post');
+    
+
+       // add post success //user
+       Route::post('/addpostsuccess','addpostsuccess')->name('add.postSuccess');
+
+        // edit post success //user
+        Route::post('/edit/post/success{id}','editpostSuccess')->name('edit.postSuccess');
+    
+});
+
+// Post Controller Routes Ends
+
+
 // QueryController Routes
 
 Route::controller(QueryController::class)->group(function(){
@@ -57,6 +87,10 @@ Route::controller(QueryController::class)->group(function(){
 
     // GetUsers
     Route::post('/getuser','getUser')->name('get.User');
+
+    
+       // Delete Profile Image
+       Route::get('/profile/image/delete','profileimageDelete')->name('profileimage.delete');
 
     // Profile Update
     Route::post('/updateprofile','updateprofile')->name('update.profile');
@@ -78,3 +112,4 @@ Route::controller(QueryController::class)->group(function(){
 });
 
 // QueryController Routes End
+

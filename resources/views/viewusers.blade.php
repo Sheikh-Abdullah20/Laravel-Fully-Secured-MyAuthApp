@@ -10,11 +10,9 @@ View
 <div class="alert alert-success text-dark">
     {{ session('success') }}
 </div>
-@endif
-
-@if (session()->has('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
+@elseif(session()->has('error'))
+<div class="alert alert-danger text-dark">
+    {{ session('success') }}
 </div>
 @endif
 

@@ -77,6 +77,24 @@
             opacity: 1;
         }
     }
+
+    svg{
+            width: 20px;
+            fill: white;
+        }
+        .nav-link:hover{
+            transition: 0.3s ease;
+            color: #6d6d6d
+        }
+        .navbar-toggler-icon{
+          width: 100%;
+          align-content: center;
+        }
+     
+        .navbar-collapse{
+            display: flex;
+            justify-content: end;
+        }
 </style>
 
 @endsection
@@ -88,10 +106,20 @@
         @csrf
         <div class="profile-header">
             <input type="file" id="file" onchange="document.querySelector('#img').src= window.URL.createObjectURL(this.files[0])" name="profile" style="display:none;">
+            @if (Auth::user()->profile)
             <img src="{{ asset('storage/' . Auth::user()->profile) }}" alt="Profile Picture" id="img" width="100px">
+            @else
+            <img src="{{ asset('image/image-insert.png') }}" alt="Profile Picture" id="img" style="width: 100px; height: 100px;">
+            @endif
             <div>
                 <h2>{{ Auth::user()->name }}</h2>
+                @error('profile')
+                <span class="text-danger">
+                   {{ $message }}
+                </span>
+           @enderror
             </div>
+          
         </div>
 
         <div class="profile-details">

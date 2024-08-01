@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     
     <!-- Custom CSS for animations -->
     <style>

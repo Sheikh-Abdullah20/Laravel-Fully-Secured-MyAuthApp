@@ -58,6 +58,22 @@ class QueryController extends Controller
             
         }
 
+        // user Profile Delete
+        public function profileimageDelete(){
+            $id = Auth::user()->id;
+            $user = User::find($id);
+            $path = public_path('storage/'. $user->profile);
+
+                if(file_exists($path)){
+                    @unlink($path);
+                    $user->update([
+                        'profile' => null,
+                    ]);
+                    return redirect()->route('profile')->with('success','Profile Image Deleted Succesfully');
+                }else{
+                    return redirect()->route('profile')->with('error','Profile Image Not Deleted');
+                }
+        }
 
         // User Profile Update
         public function updateprofile(Request $req){
