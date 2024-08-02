@@ -121,11 +121,11 @@ class QueryController extends Controller
                 'email' => 'required|email',
                 'subject' => 'required',
                 'message' => 'required',
-                'image' => ' required|mimes:jpg,png,jpeg,pdf,doc,docx,xsl,xslx',
+                'image' => 'mimes:jpg,png,jpeg,pdf,doc,docx,xsl,xslx',
             ]);
-            $image = time() . '.'. $req->image->extension();
             // return $image;
             if($req->hasFile('image')){
+                $image = time() . '.'. $req->image->extension();
                 $req->file('image')->move(public_path('contact-form'),$image);
             }else{
                 $image = null;
