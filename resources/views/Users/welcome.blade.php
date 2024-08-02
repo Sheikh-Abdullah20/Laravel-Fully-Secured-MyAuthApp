@@ -28,7 +28,7 @@ Home
 
         <div class="row mt-5">
             <div class="col-md-12">
-                <h2 class="text-center display-5">Your <span class="span_post"> Post </span></h2>
+                <h2 class="text-center display-5">Your <span class="span_post"> Posts </span></h2>
                 <hr>
             </div>
         </div>

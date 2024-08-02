@@ -22,30 +22,34 @@ Route::controller(ViewController::class)->group(function(){
     // Admin
     Route::get('/admin','admin')->name('admin');
     
-     // profile
-     Route::get('/profile','profile')->name('profile');
+    // profile
+    Route::get('/profile','profile')->name('profile');
 
-      // profileUpdate
-      Route::get('/profileupdate','profileupdate')->name('profileupdate');
+    // Contact us
+    Route::get('/contact','contact')->name('contact');
+
+    // profileUpdate
+    Route::get('/profileupdate','profileupdate')->name('profileupdate');
+
+    // add User //admin
+    Route::get('/adduser/admin','adduserAdmin')->name('adduser.admin');
+
+    // view all users //admin
+    Route::get('/viewusers/admin','viewusersAdmin')->name('viewusers.admin');
+      
+    // edit user //admin
+    Route::get('/edituser/admin/{id}','edituserAdmin')->name('edituser.admin');
   
     });
 
-        // add User //admin
-        Route::get('/adduser/admin','adduserAdmin')->name('adduser.admin');
+    // Coverd With The Guarded Auth
 
-        // view all users //admin
-        Route::get('/viewusers/admin','viewusersAdmin')->name('viewusers.admin');
+    // Signup
+    Route::get('/signup','signup')->name('signup')->middleware(isLogin::class);
+    // Signin
+    Route::get('/signin','signin')->name('signin')->middleware(isLogin::class);
 
-        // edit user //admin
-        Route::get('/edituser/admin/{id}','edituserAdmin')->name('edituser.admin');
-
-
-
-   
-       // Signup
-       Route::get('/signup','signup')->name('signup')->middleware(isLogin::class);
-       // Signin
-       Route::get('/signin','signin')->name('signin')->middleware(isLogin::class);
+    // Coverd With The Guarded Auth
 });
 
 // View Controller Routes End
@@ -71,18 +75,18 @@ Route::controller(PostController::class)->group(function(){
     // view all posts //admin
     Route::get('/viewposts/admin','viewpostsAdmin')->name('viewposts.admin');
 
-        // view all posts //admin
-        Route::get('/editpost/admin/{id}','editpostAdmin')->name('editpost.admin');
+    // view all posts //admin
+    Route::get('/editpost/admin/{id}','editpostAdmin')->name('editpost.admin');
     
 
-       // add post success //user
-       Route::post('/addpostsuccess','addpostsuccess')->name('add.postSuccess');
+    // add post success //user
+    Route::post('/addpostsuccess','addpostsuccess')->name('add.postSuccess');
 
-        // edit post success //user
-        Route::post('/edit/post/success/{id}','editpostSuccess')->name('edit.postSuccess');
+    // edit post success //user
+    Route::post('/edit/post/success/{id}','editpostSuccess')->name('edit.postSuccess');
 
-        // Edit Post //Admin
-        Route::post('/edit/post/success/admin/{id}','editpostSuccessAdmin')->name('edit.postSuccessAdmin');
+    // Edit Post //Admin
+    Route::post('/edit/post/success/admin/{id}','editpostSuccessAdmin')->name('edit.postSuccessAdmin');
     
 });
 
@@ -99,9 +103,11 @@ Route::controller(QueryController::class)->group(function(){
     // GetUsers
     Route::post('/getuser','getUser')->name('get.User');
 
+    // Contact Form 
+    Route::post('/contact/success','contactSuccess')->name('contact.success');
     
-       // Delete Profile Image
-       Route::get('/profile/image/delete','profileimageDelete')->name('profileimage.delete');
+    // Delete Profile Image
+    Route::get('/profile/image/delete','profileimageDelete')->name('profileimage.delete');
 
     // Profile Update
     Route::post('/updateprofile','updateprofile')->name('update.profile');

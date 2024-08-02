@@ -48,6 +48,10 @@ class ViewController extends Controller
        
     }
 
+    public function contact(){
+        return view('Users/contact-usForm');
+    }
+
     // Admin User View 
         
     public function viewusersAdmin(){

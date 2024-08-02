@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\adminMail;
 use App\Mail\userMail;
+use App\Mail\contact_formMail;
 use App\Mail\adminCreated_users;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -112,6 +113,30 @@ class QueryController extends Controller
             return redirect()->route('home');
         }
         
+        // contact Form Request
+
+        public function contactSuccess(Request $req){
+            $req->validate([
+                'name' => 'required|min:3',
+                'email' => 'required|email',
+                'subject' => 'required',
+                'message' => 'required',
+                'image' => ' required|mimes:jpg,png,jpeg,pdf,doc,docx,xsl,xslx',
+            ]);
+            $image = time() . '.'. $req->image->extension();
+            // return $image;
+            if($req->hasFile('image')){
+                $req->file('image')->move(public_path('contact-form'),$image);
+            }else{
+                $image = null;
+            }
+
+            $email = 'abdullahsheikhmuhammad21@gmail.com';
+            Mail::to($email)->send(new contact_formMail($image,$req->all()));
+            return redirect()->route('contact')->with('success','Your Request Has Been Successfully Sent'); 
+        }
+
+        // contact Form Request End 
 
         // Admin User Add 
         public function addUserAdmin(Request $req){
